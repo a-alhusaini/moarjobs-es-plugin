@@ -1,6 +1,7 @@
-mission "Pirate Intelligence A"
+mission "moarjobs: Pirate Intelligence A"
 	name "Pirate Intelligence"
 	priority
+	autosave
 	source Freedom
 	to offer
 		"main plot completed" == 1
@@ -14,9 +15,11 @@ mission "Pirate Intelligence A"
 		ship "Marauder Falcon" "R.M.S Power"
 		government "Republic"
 		system Alnitak
+		personality staying timid
 	on complete
 		dialog "A hooded figure walks up to you and thanks you for scanning the <npc> and promptly gives you <payment>. After handing him your scanner logs, you wonder how they knew that you scanned the <npc>. You can probably get more information if you visit some of the nearby pirate planet's spaceports."
 		payment 150000
+		"reputation: Navy (Oathkeeper)" = -50
 	on offer
 		conversation
 			`While walking around the <planet> spaceport, a man wearing what looks like a local military uniform flags you down.`
@@ -29,20 +32,22 @@ mission "Pirate Intelligence A"
 				`{Decline the job}`
 					decline
 
-mission "Pirate Neutralization A"
+mission "moarjobs: Pirate Neutralization A"
 	source Zenith
-	minor
+	name "Neutralize Timmy and Tammy"
+	description "The military uniform wearing officer asked you to take care of Timmy and Tammy in the <waypoints> system. Take them out and return to <source> for payment"
 	npc kill
 		ship "Marauder Leviathan (Weapons)" "Timmy"
 		government "Pirate"
 		system Almaaz
-		personality heroic disables plunders nemesis
+		personality heroic disables plunders nemesis staying
 	npc kill
 		ship "Marauder Leviathan (Weapons)" "Tammy"
 		government "Pirate"
 		system Almaaz
-		personality heroic disables plunders nemesis
+		personality heroic disables plunders nemesis staying
 	waypoint Almaaz
+	destination Freedom
 	to offer
 		has "Pirate Intelligence A: done"
 	on complete
@@ -61,40 +66,32 @@ mission "Pirate Neutralization A"
 			`"Well, most of the captains we asked refused and the ones who didn't never came back."`
 			choice
 				`"Who are you and how do you know my every move?"`
-				goto pds
+					goto pds
 				`{say nothing}`
-				goto end
+					goto end
 			label pds
 			`"Asking too many questions isn't a good idea in these areas." He says ominously`
 			label end
-			`"I have another job for you. Two troublesome pirates in the Almaaz system are disrupting our supply lines and plundering our ships. They are called Timmy and Tammy. Destroy them and land on Freedom for your next mission"`
+			`"I have another job for you. Two troublesome pirates in the <waypoints> system are disrupting our supply lines and plundering our ships. They are called Timmy and Tammy. Destroy them and land on Freedom for your next mission"`
 			`Just like last time. He walks away without even waiting for a response from you.`
-			accept
+				accept
 
-mission "Pirate Neutralization B"
+mission "moarjobs: Pirate Neutralization B"
 	name "Investigate pirate gang"
-	minor
+	description "A person on <source> told you that you could find more information on Pirate Defence Systems ltd on <destination>. Maybe you should investigate this."
 	source Zenith
 	destination Haven
 	to offer
 		has "Pirate Intelligence A: done"
 	on complete
-		dialog `As soon as you land on <planet>, you receive a message from Pirate Defence Systems ltd: You won't find anything useful here." This pirate gang seems quite powerful and your only options now are to do what they want you to do or tell the navy on Farpoint about them.`
+		dialog `As soon as you land on <planet>, you receive a message from Pirate Defence Systems ltd: "You won't find anything useful here."`
 	on offer
 		payment -50000
 		conversation
 			`You decide to investigate this strange person with the uniform but whenever you mention him to anyone in the area they just walk away protending they never heard what you said.`
 			`Finally, a person tells you to follow him and after going to a particularly secluded area tells you the following:`
-			`"That person is working for Pirate Defence Systems ltd. It is a pirate gang masquerading as a company. No one is certain who they are or what their goals are but there are romurs about them being able to create fake identities. A stunt thought impossible due to todays sophisticated identification technology."`
+			`"That person is working for Pirate Defence Systems ltd. It is a pirate gang masquerading as a company. No one is certain who they are or what their goals are. But there are romurs about them being able to create fake identities. A stunt thought impossible due to todays sophisticated identification technology."`
 			`Immediately after he is done talking he points a gun at you and demands 50,000 credits`
-			`"I am risking my life by telling you this so your gonna give me enough money to get out of here or I'm blowing your brains out!"`
-			`After giving him the credits he tells you to go to Haven if you want to find out more information on Pirate Defence Systems ltd`
-			accept
-
-mission "Pirate Neutralization C"
-	name "Investigate Pirate Defence Systems ltd"
-	landing
-	to offer
-		has "Pirate neutralization B: active"
-	source Haven
-	destination Farpoint
+			`"I am risking my life by telling you this. Your gonna give me enough money to get out of here or I'm blowing your brains out!"`
+			`After giving him the credits he tells you to go to <destination> if you want to find out more information on Pirate Defence Systems ltd`
+				accept
