@@ -48,6 +48,8 @@ mission "moarjobs: Pirate Neutralization A"
 		personality heroic disables plunders nemesis staying
 	waypoint Almaaz
 	destination Freedom
+	on fail
+		set "moarjobs: Betrayed PDS: Snitched to navy"
 	to offer
 		has "Pirate Intelligence A: done"
 	on complete
@@ -84,6 +86,7 @@ mission "moarjobs: Pirate Neutralization B"
 	to offer
 		has "Pirate Intelligence A: done"
 	on complete
+		set "moarjobs: Snooper"
 		dialog `As soon as you land on <planet>, you receive a message from Pirate Defence Systems Ltd.: "You won't find anything useful here."`
 	on offer
 		payment -50000
@@ -95,3 +98,18 @@ mission "moarjobs: Pirate Neutralization B"
 			`"I'm risking my life by telling you this. You're gonna give me enough money to get outta here or I'm blowing your brains out!"`
 			`After giving him the credits, he tells you to go to <destination> if you want to find more information on Pirate Defence Systems Ltd.`
 				accept
+
+mission "moarjobs: Pirate Neutralization Snitch"
+	source Haven
+	name "Report Pirate Defence Systems to the Navy"
+	destination Farpoint
+	landing
+	clearance `After telling the traffic controller that you have information about a pirate gang they give you the OK to land`
+	description "Turn against Pirate Defence Systems ltd and join the navy instead on <destination>."
+	on offer
+		dialog `Maybe it is time to get yourself out of this mess and work with the navy instead. With enough luck your previous crimes will be waived over due to your cooperation.`
+	on complete
+		"reputation: Republic" = 1
+		"reputation: Navy (Oathkeeper)" = 1
+	on accept
+		fail "moarjobs: Pirate Neutralization A"
