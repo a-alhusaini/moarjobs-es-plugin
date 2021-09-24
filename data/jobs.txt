@@ -17,7 +17,7 @@ mission "moarjobs: Pirate Intelligence A"
 		system Alnitak
 		personality staying timid
 	on complete
-		dialog "A hooded figure walks up to you, thanks you for scanning the <npc> and promptly gives you <payment>. After handing over your scanner logs, you wonder how they knew that you had already scanned the <npc>. You can probably get more information if you visit some of the nearby pirate spaceports."
+		dialog "A hooded figure walks up to you, thanks you for scanning the <npc> and promptly pays you <payment>. After handing over your scanner logs, you wonder how they knew that you had already scanned the <npc>. You can probably get more information if you visit some of the nearby pirate spaceports."
 		payment 150000
 		"reputation: Navy (Oathkeeper)" = -50
 	on offer
