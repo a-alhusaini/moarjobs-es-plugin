@@ -9,7 +9,7 @@ mission "moarjobs: Pirate Intelligence A"
 			"reputation: Republic" <= -30
 		and
 			"combat rating" >= 1000
-	description "A mysterious figure asked you to scan the <npc>. It was last seen in the <waypoints> system. "
+	description "A mysterious figure asked you to scan the <npc>. It was last seen in the <waypoints> system."
 	waypoint Alnitak
 	npc "scan outfits"
 		ship "Marauder Falcon" "R.M.S Power"
@@ -17,9 +17,10 @@ mission "moarjobs: Pirate Intelligence A"
 		system Alnitak
 		personality staying timid
 	on complete
+		"reputation: Navy (Oathkeeper)" = -50
+		"reputation: Republic" = -50
 		dialog "A hooded figure walks up to you, thanks you for scanning the <npc> and promptly pays you <payment>. After handing over your scanner logs, you wonder how they knew that you had already scanned the <npc>. You can probably get more information if you visit some of the nearby pirate spaceports."
 		payment 150000
-		"reputation: Navy (Oathkeeper)" = -50
 	on offer
 		conversation
 			`While walking around the <planet> spaceport, a man wearing what looks like a local military uniform flags you down.`
@@ -109,7 +110,7 @@ mission "moarjobs: Pirate Neutralization Snitch"
 	on offer
 		dialog `Maybe it is time to get yourself out of this mess and work with the navy instead. With enough luck your previous crimes will be waived over due to your cooperation.`
 	on complete
-		"reputation: Republic" = 1
-		"reputation: Navy (Oathkeeper)" = 1
+		"reputation: Republic" = 10
+		"reputation: Navy (Oathkeeper)" = 10
 	on accept
 		fail "moarjobs: Pirate Neutralization A"
